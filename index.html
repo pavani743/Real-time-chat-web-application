@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        #chat-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        #message-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            overflow-y: scroll;
+            max-height: 300px;
+            border-bottom: 1px solid #ddd;
+        }
+        #message-list li {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        #message-list li:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+        #message-input {
+            width: calc(100% - 80px);
+            padding: 10px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+        #send-button {
+            width: 80px;
+            padding: 10px;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <ul id="message-list"></ul>
+        <div>
+            <input type="text" id="message-input" placeholder="Type your message...">
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Simulate sending and receiving messages
+        function sendMessage(message) {
+            const li = document.createElement('li');
+            li.textContent = message;
+            document.getElementById('message-list').appendChild(li);
+        }
+
+        // Listen for send button click
+        document.getElementById('send-button').addEventListener('click', function() {
+            const messageInput = document.getElementById('message-input');
+            const message = messageInput.value.trim();
+            if (message !== '') {
+                sendMessage(message);
+                messageInput.value = '';
+            }
+        });
+
+        // Simulate receiving a message (for demonstration purposes)
+        const messages = ["Hello!", "How are you?", "I'm good, thank you!", "What about you?"];
+        messages.forEach(message => {
+            setTimeout(() => {
+                sendMessage(message);
+            }, Math.random() * 3000);
+        });
+    </script>
+</body>
+</html>
